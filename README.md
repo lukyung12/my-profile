@@ -1,2 +1,1 @@
-# DNCS
-class code place
+
