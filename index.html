@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>my profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <!-- Attractive fonts for headings and name -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #020617;
+        --bg2: #0f172a;
+        --card: #0b1223;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --accent: #38bdf8;
+        --bar-bg: #1e293b;
+        --focus: #fde047;
+        --nameGradientFrom: #22d3ee; /* cyan-400 */
+        --nameGradientTo: #f472b6; /* pink-400 */
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .light {
+        --bg: #f8fafc;
+        --bg2: #e5e7eb;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --bar-bg: #e5e7eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: linear-gradient(180deg, var(--bg), var(--bg2));
+        color: var(--text);
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--accent);
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+
+      header {
+        text-align: center;
+        padding: 56px 20px 28px;
+        position: relative;
+      }
+      /* Main name styling with vibrant gradient and creative letter-spacing */
+      header h1 {
+        font-family:
+          "Montserrat",
+          "Poppins",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        font-weight: 800;
+        font-size: clamp(2.4rem, 4.2vw + 1rem, 4.5rem); /* increased */
+        margin: 0 0 10px;
+        letter-spacing: 1px;
+        background: linear-gradient(
+          90deg,
+          var(--nameGradientFrom),
+          var(--nameGradientTo)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      }
+      header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem; /* slightly larger */
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+
+      .toggle {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        cursor: pointer;
+        background: var(--card);
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 0 16px 56px;
+        animation: fade 0.8s ease forwards;
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h2 {
+        color: var(--accent);
+        margin-top: 36px;
+        margin-bottom: 12px;
+        font-size: clamp(1.4rem, 1.2vw + 1rem, 2rem); /* increased */
+        letter-spacing: 0.3px;
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        font-weight: 700;
+      }
+      h3 {
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+
+      .card {
+        background: var(--card);
+        padding: 18px;
+        border-radius: 14px;
+        margin-top: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      /* Skills */
+      .skills {
+        display: grid;
+        gap: 14px;
+      }
+      .skill {
+        margin-bottom: 4px;
+      }
+      .skill-name {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.97rem; /* slightly larger */
+      }
+      .bar {
+        background: var(--bar-bg);
+        height: 11px; /* slightly taller */
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .fill {
+        height: 100%;
+        width: 0;
+        background: var(--accent);
+        transition: width 1.2s ease;
+      }
+
+      /* Timeline */
+      .timeline {
+        border-left: 3px solid var(--accent);
+        padding-left: 20px;
+      }
+      .timeline-item {
+        margin-bottom: 18px;
+        position: relative;
+      }
+      .timeline-item::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        background: var(--accent);
+        border-radius: 50%;
+        position: absolute;
+        left: -28px;
+        top: 4px;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+      }
+      .timeline-item h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+      .timeline-item .sub {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-top: 2px;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--accent);
+        color: #020617;
+        padding: 10px 18px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 700;
+        margin-top: 14px;
+      }
+
+      .socials a {
+        margin-right: 14px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+        padding: 24px 16px 48px;
+        font-size: 0.95rem;
+      }
+      /* Animated gradient name */
+      header h1 {
+        /* keep your chosen fonts */
+        font-family:
+          "Montserrat",
+          "Poppins",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        font-weight: 800;
+        font-size: clamp(2.4rem, 4.2vw + 1rem, 4.8rem);
+        margin: 0 0 10px;
+        letter-spacing: 1px;
+
+        background: linear-gradient(
+          90deg,
+          var(--nameGradientFrom),
+          var(--nameGradientTo),
+          var(--nameGradientFrom)
+        );
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        animation: nameGradientSlide 6s ease-in-out infinite;
+      }
+
+      @keyframes nameGradientSlide {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Respect users who prefer reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        header h1 {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <button
+        class="toggle"
+        id="themeToggle"
+        aria-pressed="false"
+        aria-label="Toggle light/dark theme"
+      >
+        🌙 Dark
+      </button>
+      <h1>GILBERT LUKE MWAKA</h1>
+      <p>
+        IT Administrator • Network troubleshooting • Windows Server • Web
+        development
+      </p>
+    </header>
+
+    <main>
+      <section aria-labelledby="about">
+        <h2 id="about">Experience</h2>
+        <div class="card">
+          <p>
+            I’m an experienced IT administrator passionate about streamlining
+            systems and exploring new tech. I enjoy tackling network challenges
+            and building reliable, automated solutions that keep operations
+            running smoothly.
+          </p>
+          <p>
+            Recently I’ve focused on deploying and hardening Windows Server,
+            improving help‑desk SLAs, and rolling out small automation projects
+            that reduce repetitive work across teams.
+          </p>
+          <ul>
+            <li>
+              <strong>IT Administrator</strong> — Company / Location —
+              <em>2023–Present</em>
+            </li>
+            <li>
+              <strong>IT Support / Intern</strong> — Company / Location —
+              <em>2018-2020</em>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills">Skills</h2>
+
+        <!-- Bulleted overview -->
+        <div class="card">
+          <h3 style="margin-top: 0; font-size: 1.05rem">Technical Skills</h3>
+          <ul>
+            <li>Active Directory & Group Policy Management</li>
+            <li>DNS / DHCP Configuration & Troubleshooting</li>
+            <li>Network Security Hardening & Endpoint Protection</li>
+            <li>Windows Server (install, hardening, backup)</li>
+            <li>Linux Administration (Ubuntu / CentOS basics)</li>
+            <li>Firewall Configuration (pfSense / FortiGate basics)</li>
+            <li>Virtualization (VMware / Hyper‑V)</li>
+            <li>Office 365 / Microsoft 365 Administration</li>
+            <li>Web Server Setup (Apache / Nginx)</li>
+            <li>Git & Version Control</li>
+            <li>Scripting & Automation (PowerShell / Bash)</li>
+          </ul>
+
+          <h3 style="margin-bottom: 6px; font-size: 1.05rem">Soft Skills</h3>
+          <ul>
+            <li>Problem Solving & Root‑Cause Analysis</li>
+            <li>Clear Documentation & User Support</li>
+            <li>Team Collaboration</li>
+            <li>Time Management & Prioritization</li>
+          </ul>
+        </div>
+
+        <div class="card skills" style="margin-top: 14px">
+          <div class="skill">
+            <div class="skill-name">
+              <span>Windows Server Administration</span><span>80%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="80%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">
+              <span>Active Directory & Group Policy</span><span>85%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="85%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">
+              <span>Network Troubleshooting (DNS/DHCP)</span><span>85%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="85%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">
+              <span>Office / Microsoft 365 Admin</span><span>85%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="85%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">
+              <span>Linux Basics</span><span>70%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="70%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">
+              <span>Virtualization (VMware / Hyper‑V)</span><span>78%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="78%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">
+              <span>Firewalls (pfSense / FortiGate)</span><span>65%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="65%"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">
+              <span>PowerShell Automation</span><span>60%</span>
+            </div>
+            <div class="bar"><div class="fill" data-level="60%"></div></div>
+          </div>
+
+          <p style="margin-top: 10px; color: var(--muted)">
+            I thrive on solving complex problems and building efficient
+            solutions that keep systems reliable and secure. I’m continuously
+            learning new tools to improve uptime and speed for the team.
+          </p>
+          <p style="margin-top: 10px; color: var(--muted)">
+            I am also deeply committed to strengthening my cybersecurity skills,
+            ensuring that the systems I manage are protected against modern
+            threats. Whether it's implementing better access controls,
+            monitoring network behavior, or exploring new security frameworks,
+            I’m dedicated to keeping infrastructure safe and reliable.
+          </p>
+          <p style="margin-top: 10px; color: var(--muted)">
+            Additionally, I enjoy working on hands‑on projects that challenge me
+            to think creatively and build practical solutions. From deploying
+            new server environments to experimenting with automation scripts,
+            I’m always pushing myself to grow and deliver better results every
+            day.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="education">
+        <h2 id="education">Education</h2>
+        <div class="card timeline">
+          <div class="timeline-item">
+            <h3>Diploma in Networking & Cyber Security</h3>
+            <div class="sub">
+              <strong>ISBAT University</strong> — <em>2024-present</em>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <h3>UACE</h3>
+            <div class="sub">
+              <strong>East High School Ntinda</strong> — <em>2011-2012</em>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <h3>UCE</h3>
+            <div class="sub">
+              <strong>Kisubi High School</strong> — <em>2007-2010</em>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="contact" id="contact">
+        <h2 id="contact">Contact & Links</h2>
+        <div class="card socials">
+          <p>
+            <a
+              class="btn"
+              href="https://www.linkedin.com/in/mwaka-gilbert-457762161/"
+              target="_blank"
+              rel="noopener"
+              >LinkedIn</a
+            >
+            <a
+              class="btn"
+              href="https://github.com/lukyung12"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              class="btn"
+              href="tel:+256755007673"
+              aria-label="Call Gilbert Luke Mwaka"
+              >Phone</a
+            >
+            <a
+              class="btn"
+              href="mailto:gilbert@ltechy.com?subject=Hello%20Gilbert&body=Hi%20Gilbert%2C%0A%0A"
+              >Email</a
+            >
+            <button
+              class="btn"
+              type="button"
+              id="copyEmailBtn"
+              aria-label="Copy email to clipboard"
+            >
+              Copy Email
+            </button>
+          </p>
+          <p style="margin-top: 10px; color: var(--muted)">
+            Email: <a href="mailto:gilbert@ltehy.com">gilbert@ltechy.com</a> •
+            Phone: <a href="tel:+256755007673">+256 755 007 673</a> • GitHub:
+            <a
+              href="https://github.com/lukyung12"
+              target="_blank"
+              rel="noopener"
+              >github.com/lukyung12</a
+            >
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>© <span id="year"></span> Gilbert-Luke-Mwaka</footer>
+
+    <script>
+      // Set the year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Fill skill bars
+      document.querySelectorAll(".fill").forEach((el) => {
+        const level = el.getAttribute("data-level") || "0%";
+        requestAnimationFrame(() => (el.style.width = level));
+      });
+
+      // Theme toggle
+      const btn = document.getElementById("themeToggle");
+      const updateLabel = () => {
+        const light = document.body.classList.contains("light");
+        btn.textContent = light ? "☀️ Light" : "🌙 Dark";
+        btn.setAttribute("aria-pressed", String(!light));
+      };
+
+      const saved = localStorage.getItem("theme");
+      if (saved === "light") document.body.classList.add("light");
+      updateLabel();
+
+      btn.addEventListener("click", () => {
+        document.body.classList.toggle("light");
+        localStorage.setItem(
+          "theme",
+          document.body.classList.contains("light") ? "light" : "dark",
+        );
+        updateLabel();
+      });
+
+      // Copy-to-clipboard fallback for Email
+      (function () {
+        const copyBtn = document.getElementById("copyEmailBtn");
+        const email = "gilbert@ltchy.com";
+        if (!copyBtn) return;
+        copyBtn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(email);
+            copyBtn.textContent = "Copied!";
+            setTimeout(() => (copyBtn.textContent = "Copy Email"), 1500);
+          } catch {
+            window.prompt("Copy email address:", email);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
