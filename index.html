@@ -302,6 +302,7 @@
       }
 
       @media print {
+        @page { size: A4; margin: 15mm; }
         .toggle, .download-btn, #copyEmailBtn { display: none !important; }
         body { background: #fff !important; color: #000 !important; }
         .card { box-shadow: none !important; border: 1px solid #ddd !important; }
@@ -569,12 +570,21 @@
         updateLabel();
       });
 
-      // Download CV as PDF (print layout)
+      // Download CV as PDF
       document.getElementById("downloadCV").addEventListener("click", () => {
         const originalTitle = document.title;
         document.title = "Gilbert-Luke-Mwaka-CV";
+        const style = document.createElement("style");
+        style.id = "force-print-style";
+        style.textContent = `
+          @media print {
+            @page { size: A4; margin: 15mm; }
+          }
+        `;
+        document.head.appendChild(style);
         window.print();
         document.title = originalTitle;
+        document.getElementById("force-print-style").remove();
       });
 
       // Copy-to-clipboard fallback for Email
