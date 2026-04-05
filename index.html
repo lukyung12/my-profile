@@ -538,6 +538,8 @@
 
     <footer>© <span id="year"></span> Gilbert-Luke-Mwaka</footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
       // Set the year
       document.getElementById("year").textContent = new Date().getFullYear();
@@ -569,9 +571,28 @@
         updateLabel();
       });
 
-      // Download CV
-      document.getElementById("downloadCV").addEventListener("click", () => {
-        window.print();
+      // Download CV as PDF
+      document.getElementById("downloadCV").addEventListener("click", async () => {
+        const btn = document.getElementById("downloadCV");
+        btn.textContent = "Generating...";
+        btn.disabled = true;
+
+        const { jsPDF } = window.jspdf;
+        const canvas = await html2canvas(document.body, { scale: 2, useCORS: true });
+        const imgData = canvas.toDataURL("image/jpeg", 0.95);
+        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+        const pageW = pdf.internal.pageSize.getWidth();
+        const pageH = pdf.internal.pageSize.getHeight();
+        const imgH = (canvas.height * pageW) / canvas.width;
+        let y = 0;
+        while (y < imgH) {
+          pdf.addImage(imgData, "JPEG", 0, -y, pageW, imgH);
+          y += pageH;
+          if (y < imgH) pdf.addPage();
+        }
+        pdf.save("Gilbert-Luke-Mwaka-CV.pdf");
+        btn.textContent = "⬇ Download CV";
+        btn.disabled = false;
       });
 
       // Copy-to-clipboard fallback for Email
