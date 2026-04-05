@@ -286,6 +286,30 @@
           animation: none;
         }
       }
+
+      .download-btn {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        cursor: pointer;
+        background: var(--accent);
+        color: #020617;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      @media print {
+        .toggle, .download-btn, #copyEmailBtn { display: none !important; }
+        body { background: #fff !important; color: #000 !important; }
+        .card { box-shadow: none !important; border: 1px solid #ddd !important; }
+        header h1 { color: #0f172a !important; -webkit-text-fill-color: #0f172a; animation: none; }
+        .fill { transition: none !important; }
+        a { color: #0369a1 !important; }
+        h2 { color: #0369a1 !important; }
+      }
     </style>
   </head>
 
@@ -299,6 +323,7 @@
       >
         🌙 Dark
       </button>
+      <button class="download-btn" id="downloadCV" aria-label="Download CV as PDF">⬇ Download CV</button>
       <h1>GILBERT LUKE MWAKA</h1>
       <p>
         IT Administrator • Network troubleshooting • Windows Server • Web
@@ -323,11 +348,11 @@
           </p>
           <ul>
             <li>
-              <strong>IT Administrator</strong> — MUNIG ENGINEERING SOLUTIONS / KOMAMBOGA —
+              <strong>IT Administrator</strong> — Company / Location —
               <em>2023–Present</em>
             </li>
             <li>
-              <strong>IT Support / Intern</strong> — MKOPA SOLAR / LUBOWA —
+              <strong>IT Support / Intern</strong> — Company / Location —
               <em>2018-2020</em>
             </li>
           </ul>
@@ -485,7 +510,7 @@
             >
             <a
               class="btn"
-              href="mailto:gilbert@ltechy.com?subject=Hello%20Gilbert&body=Hi%20Gilbert%2C%0A%0A"
+              href="mailto:mwakalukgosy2@gmail.com?subject=Hello%20Gilbert&body=Hi%20Gilbert%2C%0A%0A"
               >Email</a
             >
             <button
@@ -498,7 +523,7 @@
             </button>
           </p>
           <p style="margin-top: 10px; color: var(--muted)">
-            Email: <a href="mailto:gilbert@ltehy.com">gilbert@ltechy.com</a> •
+            Email: <a href="mailto:mwakalukgosy2@gmail.com">mwakalukgosy2@gmail.com</a> •
             Phone: <a href="tel:+256755007673">+256 755 007 673</a> • GitHub:
             <a
               href="https://github.com/lukyung12"
@@ -544,10 +569,15 @@
         updateLabel();
       });
 
+      // Download CV
+      document.getElementById("downloadCV").addEventListener("click", () => {
+        window.print();
+      });
+
       // Copy-to-clipboard fallback for Email
       (function () {
         const copyBtn = document.getElementById("copyEmailBtn");
-        const email = "gilbert@ltchy.com";
+        const email = "mwakalukgosy2@gmail.com";
         if (!copyBtn) return;
         copyBtn.addEventListener("click", async () => {
           try {
